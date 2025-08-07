@@ -159,6 +159,10 @@ pip install uv
    ```bash
    uv run python -m uvicorn app.main:app --reload
    ```
+   or a simpler way
+   ```bash
+   uv run run.py
+   ```
 
 2. Preprocess contracts:
    ```bash
