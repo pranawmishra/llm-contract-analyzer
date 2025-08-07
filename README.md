@@ -12,6 +12,14 @@ This project uses the CUAD (Contract Understanding Atticus Dataset) - a publicly
 - Contract summarization (100-150 words)
 - FastAPI-based REST API
 
+## Bonus Features (Optional Requirements)
+✅ **Semantic Search**: Implemented semantic search over clauses using ```VoyageAI``` embeddings with ```ChromaDB``` vector storage  
+✅ **Few-Shot Learning**: Enhanced clause extraction prompts with concrete examples for improved accuracy
+
+### Semantic Search API Endpoints:
+- `GET /semantic/create-embeddings` - Create embeddings for processed contracts
+- `GET /semantic/search/{query}` - Search for documents using semantic similarity
+
 ## Approach Explanation
 
 ### Methodology Overview
