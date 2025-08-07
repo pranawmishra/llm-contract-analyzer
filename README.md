@@ -242,10 +242,12 @@ app/
 │   ├── router.py          # API router configuration
 │   └── endpoints/
 │       ├── pdf_routes.py      # Contract analysis endpoints
-│       └── preprocess_routes.py # PDF preprocessing endpoints
+│       ├── preprocess_routes.py # PDF preprocessing endpoints
+│       └── semantic_search.py # create embeddings and search endpoints
 ├── services/
 │   ├── gemini_service.py      # LLM interaction service
-│   └── preprocess_pdf.py      # PDF text extraction service
+│   ├── preprocess_pdf.py      # PDF text extraction service
+│   └── langchain_service.py   # Langchain custom retreiver service
 ├── utils/
 │   └── utils.py              # Helper functions
 ├── prompts/
@@ -253,5 +255,6 @@ app/
 │   └── extract_summary_prompt.md   # LLM prompt for summarization
 └── data/
     ├── Contracts/              # Input PDF contracts
-    └── processed_contracts.json # Processed contract data
+    ├── processed_contracts.json # Processed contract data
+    └── chroma_langchain_db # Vectordb for semantic search
 ```
