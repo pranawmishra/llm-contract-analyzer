@@ -166,11 +166,13 @@ pip install uv
    uv sync
    ```
 
-3. Set up Google Gemini API credentials:
-   - Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+3. Set up Google Gemini API credentials and VoyageAI API credentials:
+   - Get your free API key for Google LLM models from [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Get your VoyageAI API key from [Voyage AI Dashboard](https://dashboard.voyageai.com/organization/api-keys)
    - Create a `.env` file in the project root:
      ```bash
      GOOGLE_API_KEY=your_api_key_here
+     VOYAGE_API_KEY=your_api_key_here
      ```
 
 4. Place contracts in `app/data/Contracts/`
