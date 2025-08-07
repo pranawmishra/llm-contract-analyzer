@@ -3,6 +3,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from app.services.gemini_service import GeminiService
 import time
+import asyncio
 
 class PdfRoutes:
     def __init__(self):
@@ -14,7 +15,8 @@ class PdfRoutes:
     def _add_routes(self):
         self.router.get("/extract-clauses-and-summary")(self.extract_clauses_and_summary)
 
-    def extract_clauses_and_summary(self):
+    async def extract_clauses_and_summary(self):
+        t1 = time.perf_counter()
         final_data = []
 
         print("Extracting clauses and summary...")
@@ -22,10 +24,19 @@ class PdfRoutes:
         with open("app/data/processed_contracts.json", "r") as f:
             contracts = json.load(f)
 
+        # create a list of tasks
+        
+
         for i, contract in enumerate(contracts):
+            tasks = []
             print(f"Processing contract {i+1} of {len(contracts)}")
-            clauses = self.gemini_service.extract_clauses(contract["text"])
-            summary = self.gemini_service.extract_summary(contract["text"])
+            # clauses = self.gemini_service.extract_clauses(contract["text"])
+            # summary = self.gemini_service.extract_summary(contract["text"])
+
+            tasks.append(asyncio.create_task(self.gemini_service.extract_clauses(contract["text"])))
+            tasks.append(asyncio.create_task(self.gemini_service.extract_summary(contract["text"])))
+
+            clauses, summary = await asyncio.gather(*tasks)
 
             final_data.append({
                 "contract_id": contract["contract_id"],
@@ -40,13 +51,19 @@ class PdfRoutes:
                 time.sleep(10)
                 print(f"Continuing...")
 
-            # break
 
         with open("output/final_output.json", "w") as f:
             json.dump(final_data, f, indent=2, ensure_ascii=False)
 
-        return JSONResponse(content={
-            "output_file": "output/final_output.json"
-        })
+        t2 = time.perf_counter()
+        print(f"Time taken: {t2 - t1} seconds")
+
+        return JSONResponse(
+            content=
+            {
+                "output_file": "output/final_output.json",
+                "time_taken": t2 - t1
+            }
+        )
 
 

@@ -21,8 +21,9 @@ class GeminiService:
         self.client = genai.Client()
         self.prompts = load_prompts()
 
-    def extract_clauses(self, contract_text):
-        response = self.client.models.generate_content(
+    async def extract_clauses(self, contract_text):
+        print("Extracting clauses...")
+        response = await self.client.aio.models.generate_content(
             model="gemini-2.5-flash",
             config=types.GenerateContentConfig(
                 system_instruction=self.prompts["extract_clause_prompt"],
@@ -37,8 +38,9 @@ class GeminiService:
 
         return clauses
     
-    def extract_summary(self, contract_text):
-        response = self.client.models.generate_content(
+    async def extract_summary(self, contract_text):
+        print("Extracting summary...")
+        response = await self.client.aio.models.generate_content(
             model="gemini-2.5-flash",
             config=types.GenerateContentConfig(
                 system_instruction=self.prompts["extract_summary_prompt"]),
