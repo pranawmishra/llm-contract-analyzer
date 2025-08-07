@@ -20,6 +20,19 @@ This project uses the CUAD (Contract Understanding Atticus Dataset) - a publicly
 - `GET /semantic/create-embeddings` - Create embeddings for generated clauses
 - `GET /semantic/search/{query}` - Search for documents using semantic similarity
 
+## Creativity
+### Advanced Two-Stage Semantic Search with Reranking
+#### **Hybrid Retrieval Architecture**
+1. **Stage 1: Vector Similarity Search**
+   - Uses VoyageAI's `voyage-3-large` embeddings (1024 dimensions) for initial candidate retrieval
+   - ChromaDB vector database for efficient similarity search
+   - Retrieves top-k candidates based on semantic similarity
+
+2. **Stage 2: Neural Reranking**
+   - Integrates VoyageAI's `rerank-2.5` model for sophisticated relevance scoring
+   - Re-evaluates and reorders initial candidates using advanced cross-attention mechanisms
+   - Significantly improves result quality by understanding query-document relationships beyond simple similarity
+
 ## Approach Explanation
 
 ### Methodology Overview

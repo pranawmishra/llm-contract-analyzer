@@ -22,29 +22,38 @@ class GeminiService:
         self.prompts = load_prompts()
 
     async def extract_clauses(self, contract_text):
-        print("Extracting clauses...")
-        response = await self.client.aio.models.generate_content(
-            model="gemini-2.5-flash",
-            config=types.GenerateContentConfig(
-                system_instruction=self.prompts["extract_clause_prompt"],
-                temperature=0.0,
-                response_mime_type="application/json",
-                response_schema=ClauseSchema
-            ),
-            contents=contract_text
-        )
+        try:
+            print("Extracting clauses...")
+            response = await self.client.aio.models.generate_content(
+                model="gemini-2.5-flash",
+                config=types.GenerateContentConfig(
+                    system_instruction=self.prompts["extract_clause_prompt"],
+                    temperature=0.0,
+                    response_mime_type="application/json",
+                    response_schema=ClauseSchema
+                ),
+                contents=contract_text
+            )
 
-        clauses = response.parsed
+            clauses = response.parsed
 
-        return clauses
+            return clauses
+        except Exception as e:
+            print(f"Error extracting clauses: {e}")
+            return None
     
     async def extract_summary(self, contract_text):
-        print("Extracting summary...")
-        response = await self.client.aio.models.generate_content(
-            model="gemini-2.5-flash",
-            config=types.GenerateContentConfig(
-                system_instruction=self.prompts["extract_summary_prompt"]),
-            contents=contract_text
-        )
+        try:
+            print("Extracting summary...")
+            response = await self.client.aio.models.generate_content(
+                model="gemini-2.5-flash",
+                config=types.GenerateContentConfig(
+                    system_instruction=self.prompts["extract_summary_prompt"]
+                ),
+                contents=contract_text
+            )
 
-        return response.text
+            return response.text
+        except Exception as e:
+            print(f"Error extracting summary: {e}")
+            return ""
