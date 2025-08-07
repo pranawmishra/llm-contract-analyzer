@@ -17,7 +17,7 @@ This project uses the CUAD (Contract Understanding Atticus Dataset) - a publicly
 ✅ **Few-Shot Learning**: Enhanced clause extraction prompts with concrete examples for improved accuracy
 
 ### Semantic Search API Endpoints:
-- `GET /semantic/create-embeddings` - Create embeddings for processed contracts
+- `GET /semantic/create-embeddings` - Create embeddings for generated clauses
 - `GET /semantic/search/{query}` - Search for documents using semantic similarity
 
 ## Approach Explanation
