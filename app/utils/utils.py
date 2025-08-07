@@ -8,7 +8,7 @@ def load_prompts():
 
     for file in Path("app/prompts").glob("*.md"):
         if str(file).endswith(".md"):
-            with open(file, "r") as f:
+            with open(file, "r", encoding="utf-8") as f:
                 prompts[str(file).split("\\")[-1].replace(".md", "")] = f.read()
 
     return prompts
