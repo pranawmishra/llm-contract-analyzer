@@ -101,4 +101,4 @@ Output:
 3. **Look for section headers**: Clauses often start with headers like "TERMINATION", "CONFIDENTIALITY", "LIABILITY"
 4. **Check for multiple clauses**: A contract may have multiple termination, confidentiality, or liability clauses
 5. **Be thorough**: Search through the entire document for relevant clauses
-6. **Handle variations**: Look for similar terms like "Term and Termination", "Non-Disclosure", "Limitation of Liability"
+6. **Handle variations**: Look for similar terms like "Term and Termination", "Non-Disclosure", "Limitation of Liability", "Indemnification"
